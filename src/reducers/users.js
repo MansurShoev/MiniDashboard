@@ -6,7 +6,7 @@ export const getUsers = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axios.get(
-        "https://6264fc9e94374a2c506bde51.mockapi.io/users"
+        "https://62726b11c455a64564c0d0a6.mockapi.io/users"
       );
       console.log(data);
       return data;
@@ -22,7 +22,7 @@ export const addUsers = createAsyncThunk(
     const user = getState().users.user;
     try {
       const { data } = await axios.post(
-        "https://6264fc9e94374a2c506bde51.mockapi.io/users",
+        "https://62726b11c455a64564c0d0a6.mockapi.io/users",
         user
       );
 
@@ -41,7 +41,7 @@ export const editUsers = createAsyncThunk(
     const id = getState().users.id;
     try {
       const { data } = await axios.put(
-        `https://6264fc9e94374a2c506bde51.mockapi.io/users/${id}`,
+        `https://62726b11c455a64564c0d0a6.mockapi.io/users/${id}`,
         user
       );
 
@@ -60,7 +60,7 @@ export const deleteUsers = createAsyncThunk(
 
     try {
       const { data } = await axios.delete(
-        `https://6264fc9e94374a2c506bde51.mockapi.io/users/${id}`
+        `https://62726b11c455a64564c0d0a6.mockapi.io/users/${id}`
       );
 
       dispatch(getUsers());
@@ -120,7 +120,9 @@ export const slice = createSlice({
       state.loading = false;
       state.users = action.payload;
     },
-    [getUsers.rejected]: setError,
+    [getUsers.rejected]: (state)=>{
+      state.users = [];
+    },
     [addUsers.pending]: setLoading,
     [addUsers.fulfilled]: (state, action) => {
       state.loading = false;

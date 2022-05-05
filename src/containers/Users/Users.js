@@ -49,6 +49,7 @@ function Users(props) {
 
     if (name === "delete") {
       dispatch(deleteUsers());
+      dispatch(getUsers());
       return;
     }
   };
